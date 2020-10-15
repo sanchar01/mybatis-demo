@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import per.san.domain.Student;
 import per.san.mapper.StudentMapper;
+import per.san.service.IDemoService;
+import per.san.service.ISlaveTestService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +20,12 @@ public class ApplicationTests {
 
     @Autowired
     StudentMapper studentMapper;
+
+    @Autowired
+    IDemoService demoService;
+
+    @Autowired
+    ISlaveTestService slaveTestService;
 
     @Test
     public void selectByStudent() {
@@ -144,5 +152,72 @@ public class ApplicationTests {
         students.add(stu2);
 
         logger.info("{}", studentMapper.insertList(students));
+    }
+
+    @Test
+    public void insertListMaster() {
+        List<Student> students = new LinkedList<>();
+        Student stu1 = new Student();
+        stu1.setName("批量01-master");
+        stu1.setPhone("13888888881");
+        stu1.setLocked((byte) 0);
+        stu1.setEmail("13888888881@138.com");
+        stu1.setSex((byte) 1);
+        students.add(stu1);
+
+        Student stu2 = new Student();
+        stu2.setName("批量02-master");
+        stu2.setPhone("13888888882");
+        stu2.setLocked((byte) 0);
+        stu2.setEmail("13888888882@138.com");
+        stu2.setSex((byte) 0);
+        students.add(stu2);
+
+        logger.info("{}", demoService.insertList(students));
+    }
+
+    @Test
+    public void insertListSlave() {
+        List<Student> students = new LinkedList<>();
+        Student stu1 = new Student();
+        stu1.setName("批量01-slave");
+        stu1.setPhone("13888888881");
+        stu1.setLocked((byte) 0);
+        stu1.setEmail("13888888881@138.com");
+        stu1.setSex((byte) 1);
+        students.add(stu1);
+
+        Student stu2 = new Student();
+        stu2.setName("批量02-slave");
+        stu2.setPhone("13888888882");
+        stu2.setLocked((byte) 0);
+        stu2.setEmail("13888888882@138.com");
+        stu2.setSex((byte) 0);
+        students.add(stu2);
+
+        logger.info("{}", slaveTestService.insertList(students));
+    }
+
+    @Test
+    public void insertListMasterSlave() {
+        List<Student> students = new LinkedList<>();
+        Student stu1 = new Student();
+        stu1.setName("批量05-master-slave");
+        stu1.setPhone("13888888881");
+        stu1.setLocked((byte) 0);
+        stu1.setEmail("13888888881@138.com");
+        stu1.setSex((byte) 1);
+        students.add(stu1);
+
+        Student stu2 = new Student();
+        stu2.setName("批量06-master-slave");
+        stu2.setPhone("13888888882");
+        stu2.setLocked((byte) 0);
+        stu2.setEmail("13888888882@138.com");
+        stu2.setSex((byte) 0);
+        students.add(stu2);
+
+        logger.info("{}", demoService.insertList(students));
+        logger.info("{}", slaveTestService.insertList(students));
     }
 }

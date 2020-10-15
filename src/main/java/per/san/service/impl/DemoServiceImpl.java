@@ -6,6 +6,8 @@ import per.san.domain.Student;
 import per.san.mapper.StudentMapper;
 import per.san.service.IDemoService;
 
+import java.util.List;
+
 /**
  * description:
  *
@@ -23,6 +25,11 @@ public class DemoServiceImpl implements IDemoService {
     @Override
     public String getContent() {
         return studentMapper.selectByStudentSelective(new Student()).toString();
+    }
+
+    @Override
+    public int insertList(List<Student> students) {
+        return studentMapper.insertList(students);
     }
 
 

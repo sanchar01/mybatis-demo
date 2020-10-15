@@ -1,5 +1,9 @@
 package per.san.service;
 
+import per.san.domain.Student;
+
+import java.util.List;
+
 /**
  * description:
  *
@@ -11,4 +15,11 @@ package per.san.service;
 public interface IDemoService {
 
     String getContent();
+
+    /**
+     * 批量插入学生
+     * @param students
+     * @return
+     */
+    int insertList(List<Student> students);
 }
